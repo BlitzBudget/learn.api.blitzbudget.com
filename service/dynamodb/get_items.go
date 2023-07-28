@@ -15,7 +15,7 @@ func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamod
 	params := &dynamodb.QueryInput{
 		TableName: aws.String(config.DynamoDBTable), // Replace with your DynamoDB table name
 		KeyConditions: map[string]*dynamodb.Condition{
-			"PK": {
+			config.PK: {
 				ComparisonOperator: aws.String("EQ"),
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{
@@ -23,7 +23,7 @@ func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamod
 					},
 				},
 			},
-			"SK": {
+			config.SK: {
 				ComparisonOperator: aws.String("BEGINS_WITH"),
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{
