@@ -17,7 +17,7 @@ func ParseQueryOutput(result *dynamodb.QueryOutput) (*[]models.DBItem, error) {
 		return &items, nil
 	}
 
-	log.Println("Parsing query output with count at:", result.Count)
+	log.Println("Parsing query output with count at:", *result.Count)
 
 	for _, item := range result.Items {
 		pkAttr := item[config.PK]

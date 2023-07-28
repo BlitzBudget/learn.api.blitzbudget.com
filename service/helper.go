@@ -16,6 +16,7 @@ func ParserRequest(body *string) (*models.Request, error) {
 		return nil, err
 	}
 
-	log.Println("Request parsed successfully: ", reqPayload)
+	resJson, _ := json.Marshal(reqPayload)
+	log.Println("Request parsed successfully: ", string(resJson))
 	return &reqPayload, nil
 }
