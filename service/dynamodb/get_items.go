@@ -32,13 +32,15 @@ func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamod
 				},
 			},
 		},
+		ProjectionExpression: &config.ProjectionExpression,
+		ScanIndexForward:     &config.ScanIndexForward,
 	}
 
 	// Perform the DynamoDB query
 	result, err := dbClient.Query(params)
 	if err != nil {
 		log.Println("Error querying DynamoDB:", err)
-		return nil, nil
+		return nil, err
 	}
 
 	return result, nil

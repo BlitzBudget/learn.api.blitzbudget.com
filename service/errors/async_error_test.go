@@ -16,13 +16,5 @@ func TestErrorCode(t *testing.T) {
 
 	errorCode := ExtractErrorCode(ErrTodoSkeletonError)
 
-	assert.Equal(*errorCode, 200)
-}
-
-func TestFiveHundredErrorCode(t *testing.T) {
-	assert := assert.New(t)
-
-	errorCode := ExtractErrorCode(ErrTodoSkeletonError)
-
 	assert.Equal(*errorCode, 400)
 }

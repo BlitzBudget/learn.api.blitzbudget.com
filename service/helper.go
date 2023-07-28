@@ -8,12 +8,12 @@ import (
 
 func ParserRequest(body *string) (*models.Request, error) {
 	// Read the SK value from the request JSON
-	var reqPayload *models.Request
-	err := json.Unmarshal([]byte(*body), reqPayload)
+	var reqPayload models.Request
+	err := json.Unmarshal([]byte(*body), &reqPayload)
 	if err != nil {
 		log.Println("Error parsing request JSON:", err)
-		return nil, nil
+		return nil, err
 	}
 
-	return reqPayload, nil
+	return &reqPayload, nil
 }

@@ -7,7 +7,10 @@ require (
 	github.com/stretchr/testify v1.8.4
 )
 
-require github.com/jmespath/go-jmespath v0.4.0 // indirect
+require (
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
+)
 
 require (
 	github.com/aws/aws-sdk-go v1.44.311
