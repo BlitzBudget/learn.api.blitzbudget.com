@@ -28,6 +28,6 @@ func FetchResults(dbClient dynamodbiface.DynamoDBAPI, body *string) (*[]models.D
 		return nil, err
 	}
 
-	log.Println("Results fetched from DynamoDB")
+	log.Println("Results fetched from DynamoDB and the item count is: ", len(*response))
 	return response, nil
 }
