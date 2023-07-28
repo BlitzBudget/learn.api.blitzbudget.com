@@ -1,0 +1,25 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "go.formatTool": "goimports",
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": ["--enable-all"],
+    "go.lintOnSave": "package",
+    "go.vetOnSave": "package",
+    "go.buildOnSave": "package",
+    "go.coverageDecorator": {
+      "type": "highlight",
+      "coveredHighlightColor": "rgba(64, 175, 64, 0.4)",
+      "uncoveredHighlightColor": "rgba(255, 0, 0, 0.4)"
+    },
+    "go.useLanguageServer": true,
+    "go.toolsEnvVars": {
+      "GO111MODULE": "on"
+    },
+    "nuxt.isNuxtApp": false
+  }
+  
