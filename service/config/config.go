@@ -10,9 +10,9 @@ var (
 	Category             = "Category"
 	CreationDate         = "creation_date"
 	File                 = "File"
-	Name                 = "Name"
+	Name                 = "BlogName"
 	Tags                 = "Tags"
-	ProjectionExpression = "pk, sk, Author, Category, creation_date, File, Name, Tags"
+	ProjectionExpression = "pk, sk, Author, Category, creation_date, File, BlogName, Tags"
 )
 
 var (
