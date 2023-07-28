@@ -8,7 +8,7 @@ import (
 
 func TestConfigUserPoolId(t *testing.T) {
 	assert := assert.New(t)
-	assert.Equal(ErrTodoSkeletonError.Error(), "there are no campaigns assigned to this user")
+	assert.Equal(ErrTodoSkeletonError.Error(), "todo fill in the error message")
 }
 
 func TestErrorCode(t *testing.T) {
