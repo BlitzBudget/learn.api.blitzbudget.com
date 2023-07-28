@@ -7,6 +7,7 @@ import (
 )
 
 func ParserRequest(body *string) (*models.Request, error) {
+	log.Println("Unmarshalling request")
 	// Read the SK value from the request JSON
 	var reqPayload models.Request
 	err := json.Unmarshal([]byte(*body), &reqPayload)
@@ -15,5 +16,6 @@ func ParserRequest(body *string) (*models.Request, error) {
 		return nil, err
 	}
 
+	log.Println("Request parsed successfully: ", reqPayload)
 	return &reqPayload, nil
 }

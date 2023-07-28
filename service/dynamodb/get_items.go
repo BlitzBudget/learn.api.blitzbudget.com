@@ -11,6 +11,7 @@ import (
 )
 
 func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamodb.QueryOutput, error) {
+	log.Panicln("fetching the DynamoDB items")
 	// Construct the DynamoDB query parameters
 	params := &dynamodb.QueryInput{
 		TableName: aws.String(config.DynamoDBTable), // Replace with your DynamoDB table name
@@ -43,5 +44,6 @@ func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamod
 		return nil, err
 	}
 
+	log.Println("Successfully queried the DynamoDB table")
 	return result, nil
 }

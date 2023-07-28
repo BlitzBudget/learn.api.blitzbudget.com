@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"learn-api-blitzbudget-com/service/config"
 	"learn-api-blitzbudget-com/service/models"
+	"log"
 
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
 func ParseQueryOutput(result *dynamodb.QueryOutput) (*[]models.DBItem, error) {
+	log.Println("Parsing query output with count at:", result.Count)
 	items := make([]models.DBItem, 0)
 
 	if result == nil || len(result.Items) == 0 {
@@ -42,5 +44,6 @@ func ParseQueryOutput(result *dynamodb.QueryOutput) (*[]models.DBItem, error) {
 		items = append(items, item)
 	}
 
+	log.Println("Successfully parsed query output and the item count is:", len(items))
 	return &items, nil
 }

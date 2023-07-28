@@ -9,6 +9,7 @@ import (
 )
 
 func FetchResults(dbClient dynamodbiface.DynamoDBAPI, body *string) (*[]models.DBItem, error) {
+	log.Println("Fetching results from DynamoDB")
 	req, err := ParserRequest(body)
 	if err != nil {
 		log.Println("Error in parsing request", err)
@@ -27,5 +28,6 @@ func FetchResults(dbClient dynamodbiface.DynamoDBAPI, body *string) (*[]models.D
 		return nil, err
 	}
 
+	log.Println("Results fetched from DynamoDB")
 	return response, nil
 }
