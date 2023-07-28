@@ -21,12 +21,11 @@ func ParseQueryOutput(result *dynamodb.QueryOutput) (*[]models.DBItem, error) {
 		authorAttr := item[config.Author]
 		categoryAttr := item[config.Category]
 		creationDateAttr := item[config.CreationDate]
-		fileAttr := item[config.File]
 		nameAttr := item[config.Name]
 		tagsAttr := item[config.Tags]
 
 		if pkAttr == nil || skAttr == nil || authorAttr == nil || categoryAttr == nil ||
-			creationDateAttr == nil || fileAttr == nil || nameAttr == nil || tagsAttr == nil {
+			creationDateAttr == nil || nameAttr == nil || tagsAttr == nil {
 			return nil, fmt.Errorf("missing required attributes in item")
 		}
 
@@ -36,7 +35,6 @@ func ParseQueryOutput(result *dynamodb.QueryOutput) (*[]models.DBItem, error) {
 			Author:       *authorAttr.S,
 			Category:     *categoryAttr.S,
 			CreationDate: *creationDateAttr.S,
-			File:         *fileAttr.S,
 			Name:         *nameAttr.S,
 			Tags:         *tagsAttr.S,
 		}

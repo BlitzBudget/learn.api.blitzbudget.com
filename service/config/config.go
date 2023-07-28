@@ -9,7 +9,6 @@ var (
 	Author               = "Author"
 	Category             = "Category"
 	CreationDate         = "creation_date"
-	File                 = "File"
 	Name                 = "BlogName"
 	Tags                 = "Tags"
 	ProjectionExpression = "pk, sk, Author, Category, creation_date, BlogName, Tags"

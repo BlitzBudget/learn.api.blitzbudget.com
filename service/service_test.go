@@ -34,7 +34,6 @@ func TestFetchResultsSuccess(t *testing.T) {
 			Author:       "John Doe",
 			Category:     "Technology",
 			CreationDate: "2023-07-28",
-			File:         "example.pdf",
 			Name:         "Sample Document",
 			Tags:         "tag1,tag2",
 		},
@@ -44,7 +43,6 @@ func TestFetchResultsSuccess(t *testing.T) {
 			Author:       "Jane Smith",
 			Category:     "Science",
 			CreationDate: "2023-07-27",
-			File:         "sample.docx",
 			Name:         "Scientific Report",
 			Tags:         "research,report",
 		},
@@ -60,7 +58,6 @@ func TestFetchResultsSuccess(t *testing.T) {
 		config.Author:       {S: &expectedResult[0].Author},
 		config.Category:     {S: &expectedResult[0].Category},
 		config.CreationDate: {S: &expectedResult[0].CreationDate},
-		config.File:         {S: &expectedResult[0].File},
 		config.Name:         {S: &expectedResult[0].Name},
 		config.Tags:         {S: &expectedResult[0].Tags},
 	}
@@ -71,7 +68,6 @@ func TestFetchResultsSuccess(t *testing.T) {
 		config.Author:       {S: &expectedResult[1].Author},
 		config.Category:     {S: &expectedResult[1].Category},
 		config.CreationDate: {S: &expectedResult[1].CreationDate},
-		config.File:         {S: &expectedResult[1].File},
 		config.Name:         {S: &expectedResult[1].Name},
 		config.Tags:         {S: &expectedResult[1].Tags},
 	}

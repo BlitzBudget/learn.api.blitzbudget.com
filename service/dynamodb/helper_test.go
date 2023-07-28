@@ -28,9 +28,6 @@ func TestParseQueryOutput(t *testing.T) {
 				"creation_date": {
 					S: stringPtr("2023-07-24T18:08:01Z"),
 				},
-				"File": {
-					S: stringPtr("content/coding/backend/serverless/golang/golang-fundamentals/chapter-1-introduction-to-golang.json"),
-				},
 				"BlogName": {
 					S: stringPtr("Chapter 1: Introduction to Golang"),
 				},
@@ -58,7 +55,6 @@ func TestParseQueryOutput(t *testing.T) {
 		Author:       "Nagarjun Nagesh",
 		Category:     "coding/backend/serverless/golang/golang-fundamentals",
 		CreationDate: "2023-07-24T18:08:01Z",
-		File:         "content/coding/backend/serverless/golang/golang-fundamentals/chapter-1-introduction-to-golang.json",
 		Name:         "Chapter 1: Introduction to Golang",
 		Tags:         "coding, backend, serverless, golang, golang-fundamentals",
 	}
