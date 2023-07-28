@@ -31,7 +31,7 @@ func TestParseQueryOutput(t *testing.T) {
 				"File": {
 					S: stringPtr("content/coding/backend/serverless/golang/golang-fundamentals/chapter-1-introduction-to-golang.json"),
 				},
-				"Name": {
+				"BlogName": {
 					S: stringPtr("Chapter 1: Introduction to Golang"),
 				},
 				"Tags": {
