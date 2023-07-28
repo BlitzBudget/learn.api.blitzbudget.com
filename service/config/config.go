@@ -12,7 +12,7 @@ var (
 	File                 = "File"
 	Name                 = "BlogName"
 	Tags                 = "Tags"
-	ProjectionExpression = "pk, sk, Author, Category, creation_date, File, BlogName, Tags"
+	ProjectionExpression = "pk, sk, Author, Category, creation_date, BlogName, Tags"
 )
 
 var (
