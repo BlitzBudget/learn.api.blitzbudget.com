@@ -1,7 +1,7 @@
 package main
 
 import (
-	"golang-template/handler"
+	"learn-api-blitzbudget-com/handler"
 
 	runtime "github.com/aws/aws-lambda-go/lambda"
 )

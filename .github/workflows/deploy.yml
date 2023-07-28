@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     
 env:
-    LAMBDA_FUNCTION_NAME: <lambda_function_name>
+    LAMBDA_FUNCTION_NAME: ${{ secrets.LAMBDA_FUNCTION_NAME }}
 
 jobs:
   build:
