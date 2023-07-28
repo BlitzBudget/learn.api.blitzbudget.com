@@ -12,6 +12,7 @@ var (
 	Name                 = "BlogName"
 	Tags                 = "Tags"
 	ProjectionExpression = "pk, sk, Author, Category, creation_date, BlogName, Tags"
+	SKPrefix             = "content/"
 )
 
 var (

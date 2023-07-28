@@ -1,6 +1,7 @@
 package dynamodb
 
 import (
+	"fmt"
 	"learn-api-blitzbudget-com/service/config"
 	"learn-api-blitzbudget-com/service/models"
 	"log"
@@ -12,6 +13,8 @@ import (
 
 func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamodb.QueryOutput, error) {
 	log.Println("fetching the DynamoDB items")
+
+	skPrefix := fmt.Sprintf("%s%s",config.SKPrefix,  *req.URL)
 	// Construct the DynamoDB query parameters
 	params := &dynamodb.QueryInput{
 		TableName: aws.String(config.DynamoDBTable), // Replace with your DynamoDB table name
@@ -28,7 +31,7 @@ func GetItems(dbClient dynamodbiface.DynamoDBAPI, req *models.Request) (*dynamod
 				ComparisonOperator: aws.String("BEGINS_WITH"),
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{
-						S: aws.String(*req.URL),
+						S: aws.String(skPrefix),
 					},
 				},
 			},
