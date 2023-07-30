@@ -8,13 +8,13 @@ import (
 
 func TestConfigUserPoolId(t *testing.T) {
 	assert := assert.New(t)
-	assert.Equal(ErrTodoSkeletonError.Error(), "todo fill in the error message")
+	assert.Equal(ErrUnableToStoreFileInS3.Error(), "error storing file in s3")
 }
 
 func TestErrorCode(t *testing.T) {
 	assert := assert.New(t)
 
-	errorCode := ExtractErrorCode(ErrTodoSkeletonError)
+	errorCode := ExtractErrorCode(ErrUnableToStoreFileInS3)
 
 	assert.Equal(*errorCode, 400)
 }

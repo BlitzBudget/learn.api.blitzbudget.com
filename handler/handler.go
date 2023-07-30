@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/s3"
 )
 
 func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -30,7 +31,8 @@ func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 	dbClient := dynamodb.New(sess)
-	res, err := service.FetchResults(dbClient, &request.Body)
+	s3Client := s3.New(sess)
+	res, err := service.FetchResults(dbClient, s3Client, &request.Body)
 	if err != nil {
 		errorAsBytes, httpStatusCode := fetchErrorMessage(err)
 		return events.APIGatewayProxyResponse{Body: string(errorAsBytes), StatusCode: httpStatusCode, Headers: header}, nil

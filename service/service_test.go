@@ -6,8 +6,11 @@ import (
 	"learn-api-blitzbudget-com/service/models"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -24,9 +27,29 @@ func (m *MockDynamoDBAPI) Query(input *dynamodb.QueryInput) (*dynamodb.QueryOutp
 	return args.Get(0).(*dynamodb.QueryOutput), args.Error(1)
 }
 
+type mockS3Client struct {
+	s3iface.S3API
+	putObjectFunc func(input *s3.PutObjectInput) (*s3.PutObjectOutput, error)
+}
+
+func (m *mockS3Client) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+	return m.putObjectFunc(input)
+}
+
 func TestFetchResultsSuccess(t *testing.T) {
 	// Create a mock DynamoDBAPI with successful query response
 	dbClient := new(MockDynamoDBAPI)
+	// Create a mock S3 client
+	s3Client := &mockS3Client{
+		putObjectFunc: func(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+			// Verify the input parameters
+			assert.Equal(t, config.S3Bucket, aws.StringValue(input.Bucket))
+			assert.Equal(t, "content/index.json", aws.StringValue(input.Key))
+
+			// Return a successful response
+			return &s3.PutObjectOutput{}, nil
+		},
+	}
 	expectedResult := []models.DBItem{
 		{
 			PK:           "12345",
@@ -48,8 +71,10 @@ func TestFetchResultsSuccess(t *testing.T) {
 		},
 	}
 
+	count := int64(1)
 	queryOutput := &dynamodb.QueryOutput{
 		Items: []map[string]*dynamodb.AttributeValue{},
+		Count: &count,
 	}
 	// Convert the expectedResult slice into the format expected by QueryOutput
 	itemMap := map[string]*dynamodb.AttributeValue{
@@ -78,7 +103,7 @@ func TestFetchResultsSuccess(t *testing.T) {
 	body := `{"url": "https://example.com"}`
 
 	// Call the FetchResults function with the provided mock DynamoDBAPI
-	result, err := FetchResults(dbClient, &body)
+	result, err := FetchResults(dbClient, s3Client, &body)
 
 	// Assert the result matches the expected output
 	assert.Nil(t, err)
@@ -91,13 +116,14 @@ func TestFetchResultsSuccess(t *testing.T) {
 func TestFetchResultsError(t *testing.T) {
 	// Create a mock DynamoDBAPI with an error response
 	dbClient := new(MockDynamoDBAPI)
+	s3Client := new(mockS3Client)
 	someError := errors.New("some error")
 	dbClient.On("Query", mock.AnythingOfType("*dynamodb.QueryInput")).Return(&dynamodb.QueryOutput{}, someError)
 
 	body := `{"url": "https://example.com"}`
 
 	// Call the FetchResults function with the provided mock DynamoDBAPI
-	result, err := FetchResults(dbClient, &body)
+	result, err := FetchResults(dbClient, s3Client, &body)
 
 	// Assert the result is nil due to error
 	assert.Nil(t, result)

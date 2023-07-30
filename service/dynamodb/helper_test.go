@@ -9,8 +9,10 @@ import (
 )
 
 func TestParseQueryOutput(t *testing.T) {
+	count := int64(1)
 	// Define a sample DynamoDB QueryOutput with items
 	sampleQueryOutput := &dynamodb.QueryOutput{
+		Count: &count,
 		Items: []map[string]*dynamodb.AttributeValue{
 			{
 				"pk": {
@@ -59,12 +61,6 @@ func TestParseQueryOutput(t *testing.T) {
 		Tags:         "coding, backend, serverless, golang, golang-fundamentals",
 	}
 	assert.Equal(t, expectedItem, (*result)[0])
-
-	// Test the case where the QueryOutput is nil (empty result)
-	emptyResult, err := ParseQueryOutput(nil)
-	assert.NoError(t, err)
-	assert.NotNil(t, emptyResult)
-	assert.Len(t, *emptyResult, 0)
 }
 
 func TestParseRequestEmptyData(t *testing.T) {
@@ -73,6 +69,14 @@ func TestParseRequestEmptyData(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, emptyItemsResult)
 	assert.Len(t, *emptyItemsResult, 0)
+}
+
+func TestParseRequestNullData(t *testing.T) {
+	// Test the case where the QueryOutput is nil (empty result)
+	emptyResult, err := ParseQueryOutput(nil)
+	assert.NoError(t, err)
+	assert.NotNil(t, emptyResult)
+	assert.Len(t, *emptyResult, 0)
 }
 
 func stringPtr(s string) *string {
